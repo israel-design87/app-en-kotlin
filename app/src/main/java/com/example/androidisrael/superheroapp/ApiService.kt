@@ -8,4 +8,7 @@ interface ApiService {
 
     @GET("/api/10228862630645759/search/{name}")
     suspend fun getSuperheroes(@Path("name") superheroName: String): Response<SuperHeroDataResponse>
+
+    @GET("/api/10228862630645759/{id}")
+    suspend fun getSuperheroDetail(@Path("id") superheroId:String): Response<SuperHeroDetailResponse>
 }

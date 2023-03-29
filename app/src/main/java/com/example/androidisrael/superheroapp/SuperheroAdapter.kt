@@ -5,10 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidisrael.R
 
-class SuperheroAdapter(var superheroList: List<SuperheroItemResponse> = emptyList()) :
+class SuperheroAdapter(
+    var superheroList: List<SuperheroItemResponse> = emptyList(),
+    private val onItemSelected: (String) -> Unit
+) :
     RecyclerView.Adapter<SuperheroViewHolder>() {
 
-    fun updateList(superheroList: List<SuperheroItemResponse>){
+    fun updateList(superheroList: List<SuperheroItemResponse>) {
         this.superheroList = superheroList
         notifyDataSetChanged()
     }
@@ -23,6 +26,6 @@ class SuperheroAdapter(var superheroList: List<SuperheroItemResponse> = emptyLis
 
 
     override fun onBindViewHolder(viewholder: SuperheroViewHolder, position: Int) {
-        viewholder.bind(superheroList[position])
+        viewholder.bind(superheroList[position],onItemSelected)
     }
 }

@@ -1,5 +1,6 @@
 package com.example.androidisrael.superheroapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidisrael.R
 import com.example.androidisrael.databinding.ActivityFirstAppBinding
 import com.example.androidisrael.databinding.ActivitySuperHeroListBinding
+import com.example.androidisrael.superheroapp.DetailSuperheroActivity.Companion.EXTRA_ID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -41,7 +43,7 @@ class SuperHeroListActivity : AppCompatActivity() {
 
         })
 
-        adapter = SuperheroAdapter()
+        adapter = SuperheroAdapter{superheroId->navigateToDetail(superheroId)}
         binding.rvSuperhero.setHasFixedSize(true)
         binding.rvSuperhero.layoutManager = LinearLayoutManager(this)
         binding.rvSuperhero.adapter = adapter
@@ -70,5 +72,11 @@ class SuperHeroListActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
+    }
+
+    private fun navigateToDetail(id: String){
+        val intent = Intent(this, DetailSuperheroActivity::class.java)
+        intent.putExtra(EXTRA_ID,id)
+        startActivity(intent)
     }
 }
